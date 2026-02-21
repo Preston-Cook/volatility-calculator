@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
 from typing import Iterable, Tuple
 import logging
+import os
 import threading
 import uuid
 
@@ -21,7 +22,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[os.environ.get("ALLOWED_ORIGIN", "*")],
     allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],

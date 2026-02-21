@@ -1,0 +1,26 @@
+services:
+  # --- Backend (FastAPI) ---
+  - type: web
+    name: volatility-api
+    runtime: python
+    rootDir: server
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: ALLOWED_ORIGIN
+        # Set this to your Render frontend URL after first deploy, e.g.:
+        # https://volatility-calculator.onrender.com
+        value: "*"
+
+  # --- Frontend (Static Site) ---
+  - type: web
+    name: volatility-calculator
+    runtime: static
+    rootDir: client
+    buildCommand: npm install -g pnpm && pnpm install && pnpm build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_API_URL
+        # Set this to your Render backend URL after first deploy, e.g.:
+        # https://volatility-api.onrender.com
+        value: https://volatility-api.onrender.com
