@@ -10,7 +10,7 @@ services:
       - key: ALLOWED_ORIGIN
         # Set this to your Render frontend URL after first deploy, e.g.:
         # https://volatility-calculator.onrender.com
-        value: "*"
+        value: "https://volatility-calculator-ehyk.onrender.com"
 
   # --- Frontend (Static Site) ---
   - type: web
